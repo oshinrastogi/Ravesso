@@ -88,6 +88,7 @@ const CartPage = () => {
             // Create an order on the backend
             const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/product/payment/create-order`, {
                 amount: totalPrice() * 100, // Amount in paise
+                cart,
             });
             console.log(data.order.id);
             console.log(data.key_id);
@@ -104,6 +105,7 @@ const CartPage = () => {
                         razorpay_payment_id: response.razorpay_payment_id,
                         razorpay_order_id: response.razorpay_order_id,
                         razorpay_signature: response.razorpay_signature,
+                        cart,
                     });
 
                     if (verificationData.success) {
